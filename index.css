@@ -1,0 +1,100 @@
+*, *::after, *::before{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #000C36;
+    color: #FFFFFF;
+}
+header{
+    text-align: center;
+}
+img{
+    width: 100px;
+    margin-top: 50px;
+}
+
+.title{
+    font-family: "Carter One", system-ui;
+    font-size: 40px;
+}
+
+main{
+    font-family: "Roboto Slab", serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100vh;
+    padding: 0 34px;
+}
+
+div{
+    width: 85%;
+}
+
+
+
+h2{
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 5px;
+    max-width: 450px;
+}
+textarea{
+    width: 100%;
+    padding: 12px;
+    resize: none;
+    background-color: #3B4877;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 300;
+    color: white;
+}
+
+button{
+    color: #000C36;
+    font-size: 30px;
+    font-weight: bold;
+    background-color: #51E08A;
+    border: none;
+    border-radius: 10px;
+    width: 85%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    cursor: pointer;
+}
+
+
+
+.result-title{
+    font-size: 30px;
+    font-weight: 700;
+    color: white;
+}
+
+.result-reasone{
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 25px;
+    color: white;
+}
+.warning{
+    background-color: red;
+    padding: 0.5em 1em;
+    color: white;
+    font-weight: bold;
+    width: 70%;
+    border-radius: 5px;
+    border: 2px solid black;
+    text-align: center;
+    font-size: 14px;
+    position: fixed;
+    top: 0;
+    right: 15%;
+    left: 15%;
+    line-height: 1.2;
+}
