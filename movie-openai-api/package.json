@@ -1,0 +1,21 @@
+{
+	"name": "movie-openai-api",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"deploy": "wrangler deploy",
+		"dev": "wrangler dev",
+		"start": "wrangler dev",
+		"test": "vitest",
+		"build": "vite build"
+	},
+	"devDependencies": {
+		"@cloudflare/vitest-pool-workers": "^0.8.19",
+		"vitest": "~3.2.0",
+		"wrangler": "^4.26.0"
+	},
+	"dependencies": {
+		"@supabase/supabase-js": "^2.52.1",
+		"openai": "^5.10.2"
+	}
+}
