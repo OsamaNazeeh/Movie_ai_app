@@ -1,4 +1,5 @@
 ```markdown
+
 # 🎬 AI-Powered Movie Recommendation App
 
 This is a lightweight, serverless application that recommends movies based on your input using **OpenAI embeddings**, **Supabase vector search**, and **Cloudflare Workers**. The app captures natural-language answers from users and matches them with similar movies using semantic search.
@@ -119,12 +120,6 @@ This app is deployed using **Cloudflare Workers** and can be hosted at a custom 
 * 📊 Improve ranking algorithm
 * 💬 Integrate chat interface using OpenAI Chat Completion
 * 🌐 UI for selecting genres and moods
-
----
-
-## 📄 License
-
-MIT License © 2025 \[Your Name]
 
 ---
 
