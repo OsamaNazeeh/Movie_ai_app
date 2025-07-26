@@ -1,24 +1,5 @@
 import {movieObjs} from "./content.js"
-/**
- *                  ============
- *                  Prerequisite
- *                  ============
- * 1- fetching the openai, supabase and LangChain api 
- * 2- Convert content.js to embedding vectors 
- *                  =============
- *                  Functionality
-*                   =============   
- * 1- pressing "Let's Go" button to start the program
- * 2- checking the value of each textarea with querySelecroAll() 
- *  2.1- show an error if one of the fields is empty
- *  2.2- proceed to 3 
- * 3- compine the answers into one answer then find it's embedding vector
- * 4- use the value for similarity check 
- * 5- take the top 1 number of answers and give them with the user answers to a chatCompletion endpoint
- *      for generative output 
- * 6- with dom manipulation show the answer with the reasone of prefered 
- * 7- upon pressing "Go Again" button the application will startover
- */
+
 
 // title, content, embedding, id
 function getMovieAsStringList(){
@@ -71,13 +52,6 @@ document.getElementById("go-btn").addEventListener('click', function(){
         }
 })
 
-// const user = [
-//     `The Shawshank Redemption Because it taught me to never give up hope no matter how hard life gets`
-    
-//     , `I want to watch movies that were released after 1990`
-//     , `I want to watch something stupid and fun`]
-// getMathcingVector(user)
-
 async function giveTheResult(userAnswers){
     let matchingResult = await getMathcingVector(userAnswers) 
     console.log(matchingResult)
@@ -91,11 +65,6 @@ async function giveTheResult(userAnswers){
             content: `user answers: ${userAnswers} movie recommanded to user: ${matchingResult.output}`
         }
     ]
-    // const res = await openai.chat.completions.create({
-    //     model: "gpt-3.5-turbo",
-    //     messages
-    // })
-    
     
     const res = await fetch('https://movie-openai-api.osamaforedu.workers.dev/api/chatCompletion' ,{
         method: "POST", 
@@ -111,12 +80,6 @@ async function giveTheResult(userAnswers){
 async function getMathcingVector(userAnswers){
     userAnswers = userAnswers.join('\n')
 
-    // fetch request with post method 
-    // const {data} = await openai.embeddings.create({
-    //     model: 'text-embedding-ada-002',
-    //     input: userAnswers 
-    // })
-
     const res = await fetch('https://movie-openai-api.osamaforedu.workers.dev/api/embedd',
         {
             method: "POST",
@@ -129,13 +92,6 @@ async function getMathcingVector(userAnswers){
     )
     const data = await res.json()
 
-    
-    // fetch request with POST method
-    // const output = await supabase.rpc('match_documents', {
-    //     query_embedding: data[0].embedding,
-    //     match_threshold: 0.7,
-    //     match_count: 1
-    // })
 
     const outputRes = await fetch('https://movie-openai-api.osamaforedu.workers.dev/api/similarity', 
         {
@@ -168,23 +124,5 @@ function renderHtml(movieDesc, movieTitle){
         </div>
     `
 }
-
-
-async function getMovieTitles(){
-    //Getting the document
-    const res = await fetch('movies.txt')
-    let text = await res.text()
-    //spliting it's to lines and dealing with it as an array
-    text = text.split('\n')
-    // specify the pattern to extract from the doc
-    const regixPattern = /^(.+?):\s+\d{4}/
-    
-    //Getting the matching patteren of movieTitle: Year of 4 digit
-    //then Getting red of the null value resulted from privouise step
-    //the return will be ["movieTitle: Year", "MovieTitle"]
-    // so we choose the column of index 1 for each row  
-    return text.map(line=>line.match(regixPattern)).filter(val => val).map(row => row[1])
-}
-
 
 

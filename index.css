@@ -27,12 +27,15 @@ main{
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    height: 100vh;
+    min-height: 100vh;
     padding: 0 34px;
 }
 
 div{
     width: 85%;
+    margin-inline: auto; 
+    display: flex;
+    flex-direction: column;
 }
 
 
@@ -42,10 +45,12 @@ h2{
     font-weight: 400;
     margin-bottom: 5px;
     max-width: 450px;
+    margin-inline: auto; 
 }
 textarea{
     width: 100%;
-    padding: 12px;
+    max-width: 650px;
+    padding: 20px 12px 20px;
     resize: none;
     background-color: #3B4877;
     border: none;
@@ -53,18 +58,24 @@ textarea{
     font-size: 14px;
     font-weight: 300;
     color: white;
+    margin-inline: auto; 
+
 }
 
 button{
-    color: #000C36;
-    font-size: 30px;
-    font-weight: bold;
-    background-color: #51E08A;
+    width: 85%;
+    padding: 20px 0;
+    margin-bottom: 45px;
+    
     border: none;
     border-radius: 10px;
-    width: 85%;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    
+    color: #000C36;
+    background-color: #51E08A;
+    
+    font-size: 30px;
+    font-weight: bold;
+    
     cursor: pointer;
 }
 
@@ -97,4 +108,35 @@ button{
     right: 15%;
     left: 15%;
     line-height: 1.2;
+}
+
+
+@media (min-width: 900px) {
+    body{
+        padding: 20px;
+    }
+    header{
+        margin-bottom: 45px;
+    }
+    img{
+     width: 250px;
+    }
+
+    .title{
+        font-family: "Carter One", system-ui;
+        font-size: 65px;
+    }
+    h2{
+        font-size: 1.75rem;
+        text-align: center;
+        margin: 1.25em auto 1em;
+    }
+
+    .q:last-of-type{
+        margin-bottom: 45px;
+    }
+
+    button{
+        max-width: 650px;
+    }
 }

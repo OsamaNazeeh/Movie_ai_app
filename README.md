@@ -1,19 +1,137 @@
-# Getting Started
-Install the dependencies and run the project
+```markdown
+# 🎬 AI-Powered Movie Recommendation App
+
+This is a lightweight, serverless application that recommends movies based on your input using **OpenAI embeddings**, **Supabase vector search**, and **Cloudflare Workers**. The app captures natural-language answers from users and matches them with similar movies using semantic search.
+
+---
+
+## 🚀 Features
+
+- ✨ Natural language understanding using `text-embedding-ada-002`
+- ⚡ Fast, serverless backend with **Cloudflare Workers**
+- 🧠 Semantic vector search powered by **Supabase PGVector**
+- 📄 User inputs are embedded and stored for intelligent matching
+- 🔍 Returns the most semantically relevant movie for a user's taste
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer          | Technology                   |
+|----------------|-------------------------------|
+| Frontend       | HTML / JS (your choice)       |
+| Backend        | Cloudflare Workers            |
+| AI Embeddings  | OpenAI `text-embedding-ada-002` |
+| Database       | Supabase + PGVector extension |
+| Storage        | Supabase `posts` table        |
+
+---
+
+## 🧩 How It Works
+
+1. The user submits a movie preference or answer (e.g., “I want something adventurous with a sci-fi vibe”).
+2. This input is sent to the Cloudflare Worker.
+3. The input is embedded using OpenAI and stored in Supabase.
+4. A semantic search (`match_documents`) retrieves the closest movie match from your database.
+5. The result is returned and shown on the frontend.
+
+---
+
+## 📂 Folder Structure
+
 ```
-npm install
-npm start
+
+project-root/
+├── movie-openai-api/      # Cloudflare Worker (serverless backend)
+│   └── index.js           # Embedding & Supabase logic
+├── public/ or frontend/   # Frontend files (optional)
+├── .gitignore
+└── README.md
+
+````
+
+---
+
+## 🧪 Environment Variables
+
+Create environment variables inside your Cloudflare Worker (`wrangler.toml` or dashboard):
+
+```env
+OPENAI_API_KEY=<your-openai-key>
+SUPABASE_URL=<your-supabase-url>
+SUPABASE_SERVICE_ROLE_KEY=<your-service-role-key>
+````
+
+---
+
+## ✅ Setup Instructions
+
+1. **Install dependencies** (if needed for your bundler)
+2. **Deploy Cloudflare Worker**:
+
+   ```bash
+   wrangler deploy
+   ```
+3. **Set up Supabase**:
+
+   * Create a `posts` table with a `content` column and an `embedding` column of type `vector(1536)`
+   * Add a `match_documents` RPC for vector search
+4. **Add movies dataset** using batch embedding
+5. **Run your frontend** (or test via API client like Postman)
+
+---
+
+## 🧠 Example Embedding RPC (Supabase SQL)
+
+```sql
+create or replace function match_documents (
+  query_embedding vector(1536),
+  match_threshold float,
+  match_count int
+)
+returns table (
+  id uuid,
+  content text,
+  similarity float
+)
+language sql
+as $$
+  select id, content, 1 - (embedding <=> query_embedding) as similarity
+  from posts
+  where 1 - (embedding <=> query_embedding) > match_threshold
+  order by similarity desc
+  limit match_count;
+$$;
 ```
 
-Head over to https://vitejs.dev/ to learn more about configuring vite
-## About Scrimba
+---
 
-At Scrimba our goal is to create the best possible coding school at the cost of a gym membership! 💜
-If we succeed with this, it will give anyone who wants to become a software developer a realistic shot at succeeding, regardless of where they live and the size of their wallets 🎉
-The Fullstack Developer Path aims to teach you everything you need to become a Junior Developer, or you could take a deep-dive with one of our advanced courses 🚀
+## 📦 Deployment
 
-- [Our courses](https://scrimba.com/courses)
-- [The Frontend Career Path](https://scrimba.com/fullstack-path-c0fullstack)
-- [Become a Scrimba Pro member](https://scrimba.com/pricing)
+This app is deployed using **Cloudflare Workers** and can be hosted at a custom domain or a `*.workers.dev` subdomain.
 
-Happy Coding!
+---
+
+## 🧠 To-Do / Future Ideas
+
+* ✅ Store user sessions for personalized history
+* 🔄 Add multi-movie matching
+* 📊 Improve ranking algorithm
+* 💬 Integrate chat interface using OpenAI Chat Completion
+* 🌐 UI for selecting genres and moods
+
+---
+
+## 📄 License
+
+MIT License © 2025 \[Your Name]
+
+---
+
+## 🧠 Credits
+
+* [OpenAI](https://openai.com/)
+* [Supabase](https://supabase.com/)
+* [Cloudflare Workers](https://developers.cloudflare.com/workers/)
+
+```
