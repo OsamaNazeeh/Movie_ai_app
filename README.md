@@ -1,5 +1,4 @@
-```markdown
-
+```
 # 🎬 AI-Powered Movie Recommendation App
 
 This is a lightweight, serverless application that recommends movies based on your input using **OpenAI embeddings**, **Supabase vector search**, and **Cloudflare Workers**. The app captures natural-language answers from users and matches them with similar movies using semantic search.
@@ -20,7 +19,7 @@ This is a lightweight, serverless application that recommends movies based on yo
 
 | Layer          | Technology                   |
 |----------------|-------------------------------|
-| Frontend       | HTML / JS (your choice)       |
+| Frontend       | HTML / JavaScript (custom)    |
 | Backend        | Cloudflare Workers            |
 | AI Embeddings  | OpenAI `text-embedding-ada-002` |
 | Database       | Supabase + PGVector extension |
@@ -41,48 +40,46 @@ This is a lightweight, serverless application that recommends movies based on yo
 ## 📂 Folder Structure
 
 ```
-
 project-root/
 ├── movie-openai-api/      # Cloudflare Worker (serverless backend)
 │   └── index.js           # Embedding & Supabase logic
 ├── public/ or frontend/   # Frontend files (optional)
 ├── .gitignore
 └── README.md
-
-````
+```
 
 ---
 
 ## 🧪 Environment Variables
 
-Create environment variables inside your Cloudflare Worker (`wrangler.toml` or dashboard):
+Set these in your Cloudflare Worker (`wrangler.toml` or dashboard):
 
-```env
+```
 OPENAI_API_KEY=<your-openai-key>
 SUPABASE_URL=<your-supabase-url>
 SUPABASE_SERVICE_ROLE_KEY=<your-service-role-key>
-````
+```
 
 ---
 
 ## ✅ Setup Instructions
 
-1. **Install dependencies** (if needed for your bundler)
+1. **Install dependencies** (if using bundlers or tooling)
 2. **Deploy Cloudflare Worker**:
-
    ```bash
    wrangler deploy
    ```
 3. **Set up Supabase**:
-
-   * Create a `posts` table with a `content` column and an `embedding` column of type `vector(1536)`
-   * Add a `match_documents` RPC for vector search
-4. **Add movies dataset** using batch embedding
-5. **Run your frontend** (or test via API client like Postman)
+   - Create a `posts` table with:
+     - `content` column (text)
+     - `embedding` column (`vector(1536)`)
+   - Add a `match_documents` RPC for vector search
+4. **Embed your movie dataset** using the batch embed function
+5. **Connect the frontend** or test API manually
 
 ---
 
-## 🧠 Example Embedding RPC (Supabase SQL)
+## 🧠 Example SQL: `match_documents` RPC
 
 ```sql
 create or replace function match_documents (
@@ -109,24 +106,22 @@ $$;
 
 ## 📦 Deployment
 
-This app is deployed using **Cloudflare Workers** and can be hosted at a custom domain or a `*.workers.dev` subdomain.
+The app is deployed via **Cloudflare Workers** to a custom domain or `*.workers.dev`.
 
 ---
 
-## 🧠 To-Do / Future Ideas
+## 🔮 Future Enhancements
 
-* ✅ Store user sessions for personalized history
-* 🔄 Add multi-movie matching
-* 📊 Improve ranking algorithm
-* 💬 Integrate chat interface using OpenAI Chat Completion
-* 🌐 UI for selecting genres and moods
+- 🧠 Personalized multi-movie recommendation
+- 📊 Dynamic rating integration
+- 💬 Chat interface with OpenAI GPT
+- 🌐 Frontend for exploring recommendations visually
 
 ---
 
-## 🧠 Credits
+## 🙏 Credits
 
-* [OpenAI](https://openai.com/)
-* [Supabase](https://supabase.com/)
-* [Cloudflare Workers](https://developers.cloudflare.com/workers/)
-
+- [OpenAI](https://openai.com/)
+- [Supabase](https://supabase.com/)
+- [Cloudflare Workers](https://developers.cloudflare.com/workers/)
 ```
