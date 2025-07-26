@@ -39,14 +39,14 @@ This is a lightweight, serverless application that recommends movies based on yo
 
 ## 📂 Folder Structure
 
-```
+
 project-root/
 ├── movie-openai-api/      # Cloudflare Worker (serverless backend)
 │   └── index.js           # Embedding & Supabase logic
 ├── public/ or frontend/   # Frontend files (optional)
 ├── .gitignore
 └── README.md
-```
+
 
 ---
 
@@ -54,11 +54,11 @@ project-root/
 
 Set these in your Cloudflare Worker (`wrangler.toml` or dashboard):
 
-```
+
 OPENAI_API_KEY=<your-openai-key>
 SUPABASE_URL=<your-supabase-url>
 SUPABASE_SERVICE_ROLE_KEY=<your-service-role-key>
-```
+
 
 ---
 
@@ -66,9 +66,9 @@ SUPABASE_SERVICE_ROLE_KEY=<your-service-role-key>
 
 1. **Install dependencies** (if using bundlers or tooling)
 2. **Deploy Cloudflare Worker**:
-   ```bash
+   bash
    wrangler deploy
-   ```
+   
 3. **Set up Supabase**:
    - Create a `posts` table with:
      - `content` column (text)
@@ -81,7 +81,7 @@ SUPABASE_SERVICE_ROLE_KEY=<your-service-role-key>
 
 ## 🧠 Example SQL: `match_documents` RPC
 
-```sql
+sql
 create or replace function match_documents (
   query_embedding vector(1536),
   match_threshold float,
@@ -100,7 +100,7 @@ as $$
   order by similarity desc
   limit match_count;
 $$;
-```
+
 
 ---
 
