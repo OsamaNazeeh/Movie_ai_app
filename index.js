@@ -54,7 +54,6 @@ document.getElementById("go-btn").addEventListener('click', function(){
 
 async function giveTheResult(userAnswers){
     let matchingResult = await getMathcingVector(userAnswers) 
-    console.log(matchingResult)
     const messages = [
         {
             role: "system", 
@@ -73,7 +72,9 @@ async function giveTheResult(userAnswers){
     })
     const data = await res.json()
     
-     renderHtml(data.choices[0].message.content, movieObjs[matchingResult.id].title)
+    const movieTitle = matchingResult.id ? movieObjs[matchingResult.id].title : "No Matching Result"
+    
+    renderHtml(data.choices[0].message.content, movieObjs[matchingResult.id].title)
 }
 
 
@@ -113,7 +114,6 @@ async function getMathcingVector(userAnswers){
 
 
 function renderHtml(movieDesc, movieTitle){
-    console.log(movieTitle)
     
     document.querySelector('main').innerHTML = `
         
