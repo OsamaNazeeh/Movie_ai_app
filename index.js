@@ -73,8 +73,8 @@ async function giveTheResult(userAnswers){
     const data = await res.json()
     
     const movieTitle = matchingResult.id ? movieObjs[matchingResult.id].title : "No Matching Result"
-    
-    renderHtml(data.choices[0].message.content, movieObjs[matchingResult.id].title)
+
+    renderHtml(data.choices[0].message.content, movieTitle)
 }
 
 
